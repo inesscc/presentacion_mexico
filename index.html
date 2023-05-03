@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Presentation Mentoring DS</title>
+    <title>Presentación</title>
     <meta charset="utf-8" />
     <meta name="author" content="" />
-    <meta name="date" content="2023-04-03" />
-    <script src="presentacion_avance_files/header-attrs-2.17/header-attrs.js"></script>
+    <meta name="date" content="2023-05-03" />
+    <script src="presentacion_proyecto_files/header-attrs-2.21/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
@@ -20,32 +20,15 @@ class: center, middle
 &lt;img src="imagenes/logo_portada2.png" width="200" /&gt;
 
 
-## Data Science Accelerator Program
+## Colaboración Chile-México
 
-### Socioeconomic stratification of the sampling frame of dwellings through the use of satellite images
+### Estratificación socioecónomica del marco muestral de viviendas mediante el uso de imágenes satelitales
 
-#### April 4, 2023
-
-
+#### Mayo 4, 2023
 
 
 
----
 
-background-image: url("imagenes/fondo2.PNG")
-background-size: contain;
-background-position: 100% 0%
-
-# Who we are?
-
-- Klaus Lehmann
-
-- Ignacio Agloni
-
-- Ricardo Pizarro
-
-
-### Alessandra Sozzi
 
 
 ---
@@ -54,9 +37,9 @@ background-image: url("imagenes/fondo2.PNG")
 background-size: contain;
 background-position: 100% 0%
 
-# Objective
+# Objetivo inicial
 
-**Stratify** selected portions of the dwelling sampling frame in the **Metropolitan Region**, identifying PSU of **high, medium and low** strata, using satellite images and  **visual recognition**.
+Estratificar algunas porciones del marco muestral de vivienda dentro de la región metropolitana, identificando UPMs de estrato alto, medio y bajo, usando imágenes satelitales y reconocimiento visual
 
 --
 
@@ -70,41 +53,12 @@ background-image: url("imagenes/fondo2.PNG")
 background-size: contain;
 background-position: 100% 0%
 
-# Objectives
+# Objetivos
 
 .center[&lt;img src="imagenes/ejemplo_upm.png" width="600"&gt;]
 
 
----
 
-background-image: url("imagenes/fondo2.PNG")
-background-size: contain;
-background-position: 100% 0%
-
-# Context
-
-
-- **What is a sampling frame**?
-
-    - It is a list that includes all the units of a population
-    - We will work with the dwellings sampling frame
-
---
-
-- **How often is the sampling frame updated?**
-
-    - After each Population and Housing Census (~10 years)
-    - Stratification takes about 2 more years
-
---
-  
-- **What is stratification and what is it for?**
-
-    - It is the clustering of the PSU according to homogeneous socioeconomic groups
-    - In sociology and economics it is a proxy for material well-being
-    - Increases the efficiency of survey samples (lower cost)
-    - Improves the accuracy of estimates from surveys
-    - Improves the targeting of public policy
 
 
 ---
@@ -113,28 +67,26 @@ background-image: url("imagenes/fondo2.PNG")
 background-size: contain;
 background-position: 100% 0%
 
-# Problem and objectives
+# Descripción de los datos
+
+- El set de entrenamiento está compuesto de recortes de imágenes satelitales para cada UPM
 
 
-- **Problems associated to the variables**
-
-    - The Censuses do not ask for income due to its difficulty of capture
-    - *Proxy* variables of well-being
-        - Percentage of people in higher education at the PSU
-        - Employment rate at the PSU
-        -	Percentage of households with a high materiality index
-        -	Total children born
+- La información de las etiquetas proviene de 3 encuestas
 
 --
 
-- **in summary:**
+- ~**1800 images** para entrenar (y testear).
 
-    - The methodology is **slow to update**
-    - We are using proxy variables
-    - The methodology can be criticized: **non-structural variables**
+--
 
+- Veamos algunos ejemplos
 
+--
 
+UPM de estrato alto:
+
+.center[&lt;img src="imagenes/casen_alto.jpg" width="350"&gt;]
 
 ---
 
@@ -144,25 +96,9 @@ background-position: 100% 0%
 
 # Description of data
 
-- The training set is made up of satellite image croppings of PSUs.
+UPM de estrato **no** alto
 
---
-
-- Information for labeling is available from 3 surveys.
-
---
-
-- ~**1800 images** for training (and testing).
-
---
-
-- Some example images:
-
---
-
-low stratum PSU:
-
-.center[&lt;img src="imagenes/bajo_1.jpg" width="350"&gt;]
+.center[&lt;img src="imagenes/casen_no_alto.jpg" width="480"&gt;]
 
 ---
 
@@ -170,50 +106,67 @@ background-image: url("imagenes/fondo2.PNG")
 background-size: contain;
 background-position: 100% 0%
 
-# Description of data
-
-low stratum PSU:
-
-.center[&lt;img src="imagenes/bajo_2.jpg" width="480"&gt;]
-
----
-
-background-image: url("imagenes/fondo2.PNG")
-background-size: contain;
-background-position: 100% 0%
-
-# Description of data
-
-High stratum PSU:
-
-.center[&lt;img src="imagenes/alto_1.jpg" width="800"&gt;]
-
----
-
-background-image: url("imagenes/fondo2.PNG")
-background-size: contain;
-background-position: 100% 0%
-
-# Description of data
-
-High stratum PSU:
-
-.center[&lt;img src="imagenes/alto_2.jpg" width="500"&gt;]
-
-
----
-
-background-image: url("imagenes/fondo2.PNG")
-background-size: contain;
-background-position: 100% 0%
-
-# Labels
+# Etiquetas iniciales
 
 PSU labeling:
 
 .center[&lt;img src="imagenes/psu.PNG" width="700"&gt;]
 
 
+---
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+
+# Estrategia inicial
+
+Redimensionamiento de las imágenes (400 X 400)
+
+Entrenar red neuronal con el 80% de los datos
+
+--
+
+**Resultado**: la red solo predice la clase mayoritaria
+
+- Predicción de ingreso alto
+- Predicción de ingreso bajo
+
+--
+
+### Predicir ingreso como variable continua a partir de características consideradas relevantes 
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+
+# Segunda estrategia
+
+.center[&lt;img src="imagenes/meme.jpg" width="700"&gt;]
+
+
+---
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+
+# Segunda estrategia
+
+Predicción del ingreso como variable continua
+
+--
+
+Extracción de características
+
+--
+
+Extreme gradient boosting (xgboost)
+
+
 
 
 ---
@@ -222,121 +175,84 @@ background-image: url("imagenes/fondo2.PNG")
 background-size: contain;
 background-position: 100% 0%
 
-# Progress status
+# Extracción de características
+
+**Variables extraídas de las imágenes**
+- Índice de vegetación
+- Piscinas
+- Luces nocturnas
 
 --
 
-1. Obtaining income data to create the labels for PSUs ✔️
+**Variables adicionales de distancia**
+- Supermercados en general
+- Marcas de supermercado
+- Farmacias
+- Estaciones de metro
+- Comisarías (estaciones de policía)
 
---
-
-2. Obtaining polygons associated to PSUs ✔️
-
---
-
-3. PSU cropping using *software* SAS Planet ✔️
-
---
-
-4. PSU labeling &amp;#9997;
-
---
-
-5. Development of a binary classifier prototype (low stratum / other) ✔️
-
---
-
-6. Development of multiclass classifier (high, medium, low) &amp;#10060;
-
---
-
-7. Evaluation of the classifier &amp;#9997;
-
---
-
-8. Validation with expert judgment &amp;#10060;
-
---
-
-9. Final adjustments to the model and/or training data &amp;#10060;
-
---
-
-10. Proposal for production &amp;#10060;
-
---
-
-11. Writing of the methodological document &amp;#9997;
 
 ---
-
-
 background-image: url("imagenes/fondo2.PNG")
 background-size: contain;
 background-position: 100% 0%
 
-# Main challenges
+# Algunos resultados
 
-
---
-
-- Automate polygon cropping (almost ready).
-
---
-
-- We are currently training with 211 images (~20% low stratum).
-
---
-
-- We have to harmonize the income from different surveys (this week)
-
---
-
-- Our classifier is **predicting the absence of the attribute in all cases**.
-
-
-
-```
-##          poor non_poor
-## poor        0        0
-## non_poor    8       33
-```
-
---
-
-- **Integration of external information** to the images, such as the district.
-
---
-
-- Use a pretrained model
-
---
-
-- We are thinking of predicting the stratum of each building within a PSU.
-
-    - We are exploring this approach with our mentor (bottom-up strategy).
+.center[&lt;img src="imagenes/importance.png" width="500"&gt;]
 
 ---
-
-
 background-image: url("imagenes/fondo2.PNG")
 background-size: contain;
 background-position: 100% 0%
 
-# Bottom-up approach
+# Algunos resultados
 
-### The images are very complex
+.center[&lt;img src="imagenes/lines1.png" width="500"&gt;]
 
---
+---
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
 
-.center[&lt;img src="imagenes/bottom-up.png" width="600"&gt;]
+# Algunos resultados
 
-### Aggregation of partial results 
+.center[&lt;img src="imagenes/smooth_lines1.png" width="500"&gt;]
+
+---
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Algunos resultados
+
+.center[&lt;img src="imagenes/scatter.png" width="500"&gt;]
+
+
 
 
 ---
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Ideas y consultas 
+
+Entrenar una red neuronal con imágenes y usar eso como input para el modelo
+
+--
+
+Crear más imágenes etiquetadas e insistir con la red 
+
+.center[&lt;img src="imagenes/aumentar_imagenes.png" width="400"&gt;]
 
 
+--
+
+¿Recomiendan algún preprocesamiento de las imágenes?
+
+
+---
 
 class: center, middle
 
