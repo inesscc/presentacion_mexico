@@ -269,8 +269,8 @@ class: center, middle
 <img src="imagenes/logo_portada2.png" width="200" />
 
 
-## Presentation DS Accelerator Program
+## Colaboración Chile-México
 
-### Socioeconomic stratification of the sampling frame of dwellings through the use of satellite images
+### Estratificación socioeconómica del marco muestral de viviendas a través del uso de imágenes satelitales
 
-#### April 4, 2023
+#### Mayo 4, 2023
