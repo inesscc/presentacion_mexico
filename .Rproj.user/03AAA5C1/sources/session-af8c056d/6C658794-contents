@@ -1,0 +1,436 @@
+---
+title: "Presentation Mentoring DS"
+subtitle: "Socioeconomic stratification of the sampling frame of dwellings through the use of satellite images"  
+author: 
+date: '`r Sys.Date()`'
+output:
+  xaringan::moon_reader:
+    seal: false
+    #lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: False
+---
+
+class: center, middle
+
+.linea-superior[]
+.linea-inferior[]
+
+<img src="imagenes/logo_portada2.PNG" width="200" />
+
+
+## Data Science Accelerator Program
+
+### Socioeconomic stratification of the sampling frame of dwellings through the use of satellite images
+
+#### March 28, 2023
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = TRUE)
+knitr::opts_chunk$set(message = FALSE) 
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+```
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Aims and contents
+
+--
+
+.medium-par[Aim of the presentation:]
+
+--
+
+Present to our mentor **background** on the **Socioeconomic stratification of the sampling frame of dwellings through the use of satellite images** work, its **progress status**, its **main challenges** and **next steps**.
+
+.medium-par[Contents:]
+
+--
+
+- Context
+
+--
+
+- Problem and aims
+
+--
+
+- Inicial solution and progress status
+
+--
+
+- Data characteristics
+
+--
+
+- Main challenges
+
+--
+
+- Next steps
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Context
+
+
+--
+
+- What is a **sampling frame**?
+
+    - It is a list where it is possible to identify all the units
+    - We will work with the dwellings sampling frame
+
+--
+
+- How often is the sampling Frame updated?
+
+    - After each Population and Housing Census (~10 years)
+    - Stratification takes about 2 more years
+
+--
+  
+- What is stratification and what is it for?
+
+    - It is the clustering of the PSU according to homogeneous socioeconomic groups
+    - In sociology and economics it is a proxy for material well-being
+    - Increases the efficiency of survey samples (lower cost)
+    - Improves the accuracy of estimates from surveys
+    - Improves the targeting of public policy
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Context
+
+--
+
+- How is the sampling frame updated?
+
+    - With information from the Pre-census (Urban Limits, structure)
+    - With information from the Census questionnaire (for stratification)
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Problem and aims
+
+--
+
+- This work seeks to stratify the sampling frame at the PSU level
+
+--
+
+- What is the problem currently?
+
+    - The Censuses do not ask for income due to its difficulty of capture
+    - It has been stratified with variables that are considered a *proxy* of well-being
+        - Percentage of people in higher education at the PSU
+        - Occupancy rate at the PSU
+        -	Percentage of homes with a high materiality index in the PSU
+        -	Total children born
+
+--
+
+- in summary:
+
+    - The methodology is **slow to update**
+    - The variables available for the procedure are **inadequate**
+    - The methodology is questioned: **non-structural variables**
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Problem and aims
+
+--
+
+- .medium-par[General aim:]
+
+--
+
+**Stratify** selected portions of the dwelling sampling frame in the **Metropolitan Region**, distinguishing PSU of **high, medium and low** stratum, from satellite images using **visual recognition with deep learning**.
+
+--
+
+- .medium-par[Specific aims:]
+
+1. **Automate** a process of **capture and storage** of satellite images.
+2. Carry out training based on PSU for which information on **household income** (*ground truth*) is available.
+3. **Evaluate the quality of the classification** through evaluation metrics and contrasting with external information and against expert judgment.
+4. Generate a proposal to **put into production** the model for the rest of the country's regions.
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Inicial solution and progress status
+
+--
+
+1. Obtaining data from surveys that capture income with their identified PSUs ✔️
+
+--
+
+2. Obtaining polygons associated with UPM achieved ✔️
+
+--
+
+3. PSU cut through *software* SAS Planet ✔️
+
+--
+
+4. PSU labelling &#9997;
+
+--
+
+5. Development of a binary classifier prototype (low stratum / other) ✔️
+
+--
+
+6. Development of multiclass classifier (high, medium, low) &#10060;
+
+--
+
+7. Classification evaluation &#9997;
+
+--
+
+8. Validation with expert judgment &#10060;
+
+--
+
+9. Final adjustments to the model and/or training data &#10060;
+
+--
+
+10. Proposal for production &#10060;
+
+--
+
+11. Writing of the methodological document &#9997;
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Inicial solution and progress status
+
+PSU Labelling:
+
+.center[<img src="imagenes/psu.PNG" width="600">]
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Data characteristics
+
+- The training set is made up of satellite image clippings that each represent a PSU.
+
+--
+
+- Information for labeling is available from 3 surveys.
+
+--
+
+- Total of **1843 images** for training.
+
+--
+
+- Some example images:
+
+--
+
+low stratum PSU:
+
+.center[<img src="imagenes/bajo_1.jpg" width="350">]
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Data characteristics
+
+low stratum PSU:
+
+.center[<img src="imagenes/bajo_2.jpg" width="480">]
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Data characteristics
+
+High stratum PSU:
+
+.center[<img src="imagenes/alto_1.jpg" width="800">]
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Data characteristics
+
+High stratum PSU:
+
+.center[<img src="imagenes/alto_2.jpg" width="500">]
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Main challenges
+
+--
+
+- Automate polygon clipping.
+
+--
+
+- We are currently training with 211 images (~15% low stratum). It remains to label the rest of the images with survey information.
+
+--
+
+- The **labelling is not trivial**. It implies a deep knowledge of income measurement in surveys.
+
+--
+
+- Currently the classifier obtains an 85% accuracy, **predicting the absence of the attribute in all cases**.
+
+--
+
+- An alternative to exploring is to **add known external information** to the images, such as the district.
+
+--
+
+- **The amount of data available is limited**, unless another approach is taken, such as predicting the stratum of each building within a PSU.
+
+    - how to detect each building with its bounding box?
+
+--
+
+- The images are **complex** and very **various**.
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Main challenges
+
+Some examples:
+
+1. Irregular shape and gray areas:
+
+.center[<img src="imagenes/forma_extrana.PNG" width="500">]
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Main challenges
+
+Some examples:
+
+1. Extensive territory with few private dwellings:
+
+.center[<img src="imagenes/upm_extensa.PNG" width="500">]
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Main challenges
+
+Some examples:
+
+1. Partial images:
+
+.center[<img src="imagenes/parcial.jpg" width="500">]
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Next steps
+
+--
+
+- **Finish labeling** of the UPM that we are not using in training yet
+
+--
+
+- Try different **image preprocessing** strategies.
+
+--
+
+- Try different network architectures (I've only tried Densenet and Mobilenet so far)
+
+--
+
+- Try **fine tuning** and **data augmentation** strategies, to overcome the problem of scarce data.
+
+--
+
+- Test strategy to predict the stratum of each building within a PSU.
+
+---
+
+class: center, middle
+
+.linea-superior[]
+.linea-inferior[]
+
+<img src="imagenes/logo_portada2.PNG" width="200" />
+
+
+## Presentation DS Accelerator Program
+
+### Socioeconomic stratification of the sampling frame of dwellings through the use of satellite images
+
+#### March 28, 2023

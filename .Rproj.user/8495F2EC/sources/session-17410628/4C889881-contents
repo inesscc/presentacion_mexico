@@ -1,0 +1,226 @@
+---
+title: "Presentation Mentoring DS"
+subtitle: "Socioeconomic stratification of the sampling frame of dwellings through the use of satellite images"  
+author: 
+date: '`r Sys.Date()`'
+output:
+  xaringan::moon_reader:
+    seal: false
+    #lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: False
+---
+
+class: center, middle
+
+.linea-superior[]
+.linea-inferior[]
+
+<img src="imagenes/logo_portada2.png" width="200" />
+
+
+## Data Science Accelerator Program
+
+### Socioeconomic stratification of the sampling frame of dwellings through the use of satellite images
+
+#### May 2, 2023
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = TRUE)
+knitr::opts_chunk$set(message = FALSE) 
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+```
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Who we are?
+
+- Klaus Lehmann
+
+- Ignacio Agloni
+
+- Ricardo Pizarro
+
+
+### Alessandra Sozzi
+
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Objective
+
+**Stratify** selected portions of the dwelling sampling frame in the **Metropolitan Region**, identifying PSU of **high, medium and low** strata, using satellite images and  **visual recognition**.
+
+--
+
+## But along the way we've changed a bit...
+
+--
+
+.center[<img src="imagenes/meme.png" width="500">]
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Objective 2
+
+**Stratify** selected portions of the dwelling sampling frame in the **Metropolitan Region**, identifying PSU **income range** strata, using satellite images,  **visual recognition** and **and other data sources**.
+
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Context - testing ways
+
+.center[<img src="imagenes/roadmap.png" width="100%">]
+
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Feature model
+
+Variables:
+1. Vegetation index (google earth engine)
+1. Night lights (google earth engine)
+1. Number of pools (leaflets images)
+1. Distance from the nearest pharmacy (public shapes repository)
+1. Distance from the nearest subway station (public shapes repository)
+1. Distance from the nearest supermarket (public shapes repository)
+1. Distance from the nearest Police station (public shapes repository)
+1. Distance from the nearest supermarket (google maps)
+
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# feature model - results
+
+## Xgboost model - max.depth = 2, nrounds = 50
+
+--
+
+.center[<img src="imagenes/importance.png" width="500">]
+
+---
+
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# feature model - results
+
+.center[<img src="imagenes/lines1.png" width="800">]
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# feature model - results
+
+.center[<img src="imagenes/smooth_lines1.png" width="500">]
+
+---
+
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# feature model - results
+
+.center[<img src="imagenes/no_log.png" width="500">]
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# feature model - results
+
+.center[<img src="imagenes/scatter.png" width="500">]
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Towards productive
+
+- Get all the of PSU shapes from **Metropolitan Region**
+
+--
+
+- Extract features for all shapes
+
+--
+
+- Develop a Shinyapp in R with the preloaded features, so that the user can select each PSU and see its features
+
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Next steps
+
+
+- Extract new features
+
+--
+
+- Improve the variables we already have (Sentinel2)
+
+--
+
+- Train a Neural Network model just with images and use that as input
+
+---
+
+
+class: center, middle
+
+.linea-superior[]
+.linea-inferior[]
+
+<img src="imagenes/logo_portada2.png" width="200" />
+
+
+## Presentation DS Accelerator Program
+
+### Socioeconomic stratification of the sampling frame of dwellings through the use of satellite images
+
+#### May 2, 2023

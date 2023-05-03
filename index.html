@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Presentation Mentoring DS</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="" />
+    <meta name="date" content="2023-04-03" />
+    <script src="presentacion_avance_files/header-attrs-2.17/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+class: center, middle
+
+.linea-superior[]
+.linea-inferior[]
+
+&lt;img src="imagenes/logo_portada2.png" width="200" /&gt;
+
+
+## Data Science Accelerator Program
+
+### Socioeconomic stratification of the sampling frame of dwellings through the use of satellite images
+
+#### April 4, 2023
+
+
+
+
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Who we are?
+
+- Klaus Lehmann
+
+- Ignacio Agloni
+
+- Ricardo Pizarro
+
+
+### Alessandra Sozzi
+
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Objective
+
+**Stratify** selected portions of the dwelling sampling frame in the **Metropolitan Region**, identifying PSU of **high, medium and low** strata, using satellite images and  **visual recognition**.
+
+--
+
+.center[&lt;img src="imagenes/mapa_chile.png" width="350"&gt;]
+
+
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Objectives
+
+.center[&lt;img src="imagenes/ejemplo_upm.png" width="600"&gt;]
+
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Context
+
+
+- **What is a sampling frame**?
+
+    - It is a list that includes all the units of a population
+    - We will work with the dwellings sampling frame
+
+--
+
+- **How often is the sampling frame updated?**
+
+    - After each Population and Housing Census (~10 years)
+    - Stratification takes about 2 more years
+
+--
+  
+- **What is stratification and what is it for?**
+
+    - It is the clustering of the PSU according to homogeneous socioeconomic groups
+    - In sociology and economics it is a proxy for material well-being
+    - Increases the efficiency of survey samples (lower cost)
+    - Improves the accuracy of estimates from surveys
+    - Improves the targeting of public policy
+
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Problem and objectives
+
+
+- **Problems associated to the variables**
+
+    - The Censuses do not ask for income due to its difficulty of capture
+    - *Proxy* variables of well-being
+        - Percentage of people in higher education at the PSU
+        - Employment rate at the PSU
+        -	Percentage of households with a high materiality index
+        -	Total children born
+
+--
+
+- **in summary:**
+
+    - The methodology is **slow to update**
+    - We are using proxy variables
+    - The methodology can be criticized: **non-structural variables**
+
+
+
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Description of data
+
+- The training set is made up of satellite image croppings of PSUs.
+
+--
+
+- Information for labeling is available from 3 surveys.
+
+--
+
+- ~**1800 images** for training (and testing).
+
+--
+
+- Some example images:
+
+--
+
+low stratum PSU:
+
+.center[&lt;img src="imagenes/bajo_1.jpg" width="350"&gt;]
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Description of data
+
+low stratum PSU:
+
+.center[&lt;img src="imagenes/bajo_2.jpg" width="480"&gt;]
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Description of data
+
+High stratum PSU:
+
+.center[&lt;img src="imagenes/alto_1.jpg" width="800"&gt;]
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Description of data
+
+High stratum PSU:
+
+.center[&lt;img src="imagenes/alto_2.jpg" width="500"&gt;]
+
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Labels
+
+PSU labeling:
+
+.center[&lt;img src="imagenes/psu.PNG" width="700"&gt;]
+
+
+
+
+---
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Progress status
+
+--
+
+1. Obtaining income data to create the labels for PSUs ✔️
+
+--
+
+2. Obtaining polygons associated to PSUs ✔️
+
+--
+
+3. PSU cropping using *software* SAS Planet ✔️
+
+--
+
+4. PSU labeling &amp;#9997;
+
+--
+
+5. Development of a binary classifier prototype (low stratum / other) ✔️
+
+--
+
+6. Development of multiclass classifier (high, medium, low) &amp;#10060;
+
+--
+
+7. Evaluation of the classifier &amp;#9997;
+
+--
+
+8. Validation with expert judgment &amp;#10060;
+
+--
+
+9. Final adjustments to the model and/or training data &amp;#10060;
+
+--
+
+10. Proposal for production &amp;#10060;
+
+--
+
+11. Writing of the methodological document &amp;#9997;
+
+---
+
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Main challenges
+
+
+--
+
+- Automate polygon cropping (almost ready).
+
+--
+
+- We are currently training with 211 images (~20% low stratum).
+
+--
+
+- We have to harmonize the income from different surveys (this week)
+
+--
+
+- Our classifier is **predicting the absence of the attribute in all cases**.
+
+
+
+```
+##          poor non_poor
+## poor        0        0
+## non_poor    8       33
+```
+
+--
+
+- **Integration of external information** to the images, such as the district.
+
+--
+
+- Use a pretrained model
+
+--
+
+- We are thinking of predicting the stratum of each building within a PSU.
+
+    - We are exploring this approach with our mentor (bottom-up strategy).
+
+---
+
+
+background-image: url("imagenes/fondo2.PNG")
+background-size: contain;
+background-position: 100% 0%
+
+# Bottom-up approach
+
+### The images are very complex
+
+--
+
+.center[&lt;img src="imagenes/bottom-up.png" width="600"&gt;]
+
+### Aggregation of partial results 
+
+
+---
+
+
+
+class: center, middle
+
+.linea-superior[]
+.linea-inferior[]
+
+&lt;img src="imagenes/logo_portada2.png" width="200" /&gt;
+
+
+## Presentation DS Accelerator Program
+
+### Socioeconomic stratification of the sampling frame of dwellings through the use of satellite images
+
+#### April 4, 2023
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
