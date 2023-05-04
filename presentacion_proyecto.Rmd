@@ -83,7 +83,7 @@ background-position: 100% 0%
 
 --
 
-- ~**1800 images** para entrenar (y testear).
+- ~**1500 images** para entrenar (y testear).
 
 --
 
@@ -130,7 +130,9 @@ background-position: 100% 0%
 
 Redimensionamiento de las imágenes (400 X 400)
 
-Entrenar red neuronal con el 80% de los datos
+--
+
+Entrenar red neuronal con el 80% de los datos, para predecir 2 clases
 
 --
 
@@ -139,9 +141,6 @@ Entrenar red neuronal con el 80% de los datos
 - Predicción de ingreso alto
 - Predicción de ingreso bajo
 
---
-
-### Predicir ingreso como variable continua a partir de características consideradas relevantes 
 
 ---
 
@@ -247,16 +246,22 @@ background-position: 100% 0%
 
 Entrenar una red neuronal con imágenes y usar eso como input para el modelo
 
+- Obtenemos una correlación de 0.12 entre valores predichos y reales
+
 --
 
 Crear más imágenes etiquetadas e insistir con la red 
 
-.center[<img src="imagenes/aumentar_imagenes.png" width="400">]
+.center[<img src="imagenes/aumentar_imagenes.png" width="390">]
 
 
 --
 
 ¿Recomiendan algún preprocesamiento de las imágenes?
+
+--
+
+¿Conocen alguna característica que se pueda extraer y que correlacione con el ingreso? ¿temperatura? ¿material de construcción? 
 
 
 ---
